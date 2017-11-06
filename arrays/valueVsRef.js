@@ -25,3 +25,20 @@ console.log('Primeiro: '+primeiroArray);
 console.log('Segundo:  '+segundoArray);
 console.log('São iguais? '+ (primeiroArray === segundoArray));
 
+let primeiroArrayDeArrays = [
+        ['Goku, Gohan, Vegita, Trunks, Future-Trunks'],
+        ['Yamcha','Kuririn','Yajirobe','Tenshinran','Mestre Kame'],
+        ['Piccolo','Kami Sama','Dende','Senhor Popo'],
+]
+
+let segundoArrayDeArrays = primeiroArrayDeArrays.concat();// pode ser usado no lugar de Slice()
+// O método concat() retorna um novo array contendo todos os arrays ou valores passados como parâmetro
+// FONTE: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
+
+//'Yamcha'
+segundoArrayDeArrays[1][0] = 'Mr. Satan';
+
+console.log("******************** Cópia por Ref Array de Arrays ********************")
+console.log('Primeiro: '+primeiroArrayDeArrays[1]);
+console.log('Segundo: '+segundoArrayDeArrays[1]);
+
