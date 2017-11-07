@@ -51,7 +51,7 @@ let primeiroArrayDeArrays2 = [
 let segundoArrayDeArraysVazio = [];
 
 for(let index = 0, len = primeiroArrayDeArrays.length; index < len; index++) {
-        segundoArrayDeArraysVazio[index] = primeiroArrayDeArrays[index].slice();
+        segundoArrayDeArraysVazio[index] = primeiroArrayDeArrays[index].concat();
 }
 // Trocando Gohan por Pan 
 segundoArrayDeArraysVazio[0][1] = 'Pan';
@@ -59,3 +59,33 @@ segundoArrayDeArraysVazio[0][1] = 'Pan';
 console.log("******************** Cópia por Valor Array de Arrays ********************")
 console.log('Primeiro: '+primeiroArrayDeArrays[0]);
 console.log('Segundo: '+segundoArrayDeArraysVazio[0]);
+
+
+let presidenciaveis = [
+        {'nome':'Lula', 'num':13},
+        {'nome':'Bolsonaro', 'num':51},
+        {'nome':"Manuela D'Ávila", 'num':14}
+];
+
+let presidas = presidenciaveis.slice();
+
+presidas[0].nome = 'Lula ladrão roubou meu <3';
+
+
+console.log("******************** Cópia por Ref Array de Obejtos ********************")
+console.log('Primeiro: '+presidenciaveis[0].nome);
+console.log('Segundo: '+presidas[0].nome);
+
+let presidasVazio = [];
+
+for (let index = 0, len = presidenciaveis.length;index < len; index++) {
+        presidasVazio[index] = {};
+        for (let prop in presidenciaveis[index]) {
+                presidasVazio[index][prop] = presidenciaveis[index][prop];
+        }
+}
+presidasVazio[1].nome = 'Bolso[mito]naro';
+
+console.log("******************** Cópia por Valor Array de Obejtos ********************")
+console.log('Primeiro: '+presidenciaveis[1].nome);
+console.log('Segundo: '+presidasVazio[1].nome);
