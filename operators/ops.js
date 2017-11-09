@@ -21,3 +21,4 @@ function hoist() {
     console.log('Escopo '+escopo);
 }
 hoist();
+
