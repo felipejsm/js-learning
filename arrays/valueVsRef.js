@@ -89,3 +89,15 @@ presidasVazio[1].nome = 'Bolso[mito]naro';
 console.log("******************** Cópia por Valor Array de Obejtos ********************")
 console.log('Primeiro: '+presidenciaveis[1].nome);
 console.log('Segundo: '+presidasVazio[1].nome);
+
+let melodicDeathMetalBands = ['At The Gates','In Flames','Soil Work','Dark Tranquility'];
+let stillMelodicDeathMetalBands = [];
+for(let index = 0, len = melodicDeathMetalBands.length; index < len; index++) {
+        stillMelodicDeathMetalBands[index] = melodicDeathMetalBands[index];
+}
+//exchange In Flames for Amon Amarth
+stillMelodicDeathMetalBands[1] = 'Amon Amarth';
+
+console.log("******************** Metal ********************")
+console.log('Primeiro: '+melodicDeathMetalBands);
+console.log('Segundo: '+stillMelodicDeathMetalBands);
