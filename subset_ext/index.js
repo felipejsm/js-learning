@@ -2,7 +2,7 @@ console.log('************* Using let over var ************');
 
 console.log('************* Hoisting ************');
 
-oddsums(13);
+console.log('Odd Sums: 13 -> '+oddsums(13));
 
 function oddsums(n) {
     let total = 0, result = [];
