@@ -4,36 +4,44 @@ var arrayOfArray = []; //-> planejo que esse array armazene os outros arrays que
 let todosOsNiveis = [];
 
 let data = [
-    {quantidadeMatriculados: 24, unidadeEnsino: 2, ano: 2014, periodo: 0, tipo: "SUP"},
-    {quantidadeMatriculados: 10, unidadeEnsino: 5, ano: 2016, periodo: 1, tipo: "SUP"},
     {quantidadeMatriculados: 2, unidadeEnsino: 1, ano: 2017, periodo: 0, tipo: "EF"},
-    {quantidadeMatriculados: 3, unidadeEnsino: 20, ano: 2017, periodo: 0, tipo: "TEC"},
     {quantidadeMatriculados: 2, unidadeEnsino: 2, ano: 2017, periodo: 1, tipo: "MBA"},
-    {quantidadeMatriculados: 1, unidadeEnsino: 3, ano: 2017, periodo: 1, tipo: "MESTRADO"},
+    {quantidadeMatriculados: 24, unidadeEnsino: 2, ano: 2014, periodo: 0, tipo: "SUP"},
     {quantidadeMatriculados: 168, unidadeEnsino: 2, ano: 2017, periodo: 1, tipo: "SUP"},
     {quantidadeMatriculados: 99, unidadeEnsino: 2, ano: 2017, periodo: 1, tipo: "SUP"},
     {quantidadeMatriculados: 139, unidadeEnsino: 2, ano: 2017, periodo: 1, tipo: "SUP"},
+    {quantidadeMatriculados: 150, unidadeEnsino: 2, ano: 2017, periodo: 1, tipo: "SUP"},
+    {quantidadeMatriculados: 1, unidadeEnsino: 3, ano: 2017, periodo: 1, tipo: "MESTRADO"},
     {quantidadeMatriculados: 3, unidadeEnsino: 4, ano: 2017, periodo: 1, tipo: "SUP"},
     {quantidadeMatriculados: 1, unidadeEnsino: 4, ano: 2017, periodo: 1, tipo: "SUP"},
-    {quantidadeMatriculados: 150, unidadeEnsino: 2, ano: 2017, periodo: 1, tipo: "SUP"}
+    {quantidadeMatriculados: 10, unidadeEnsino: 5, ano: 2016, periodo: 1, tipo: "SUP"},
+    {quantidadeMatriculados: 3, unidadeEnsino: 20, ano: 2017, periodo: 0, tipo: "TEC"}
 ]; // -> exemplo de como os dados virão
 let tmpArr = [];
-data.reduce(function(valorAnterior, valorAtual, indice, array) {
-    tmpArr.push(angular.copy(array[indice-1]));//tmpArr = [{quantidadeMatriculados: 24, unidadeEnsino: 2, ano: 2014, periodo: 0, tipo: "SUP"}]
-    if(indice-1 === 0) { //me certifico que é o primeiro loop
-        todosOsNiveis.push(angular.copy(tmpArr));// todosOsNiveis = [{tmpArr : [{quantidadeMatriculados: 24, unidadeEnsino: 2, ano: 2014, periodo: 0, tipo: "SUP"}]}]
-    } else {
-        agrupaPorUnidade(todosOsNiveis,tmpArr);
-    }
-    tmpArr.splice(0);
-});
+function callMe() {
+    console.log("Start you're engines, gentleman: ");
+    data.reduce(function(valorAnterior, valorAtual, indice, array) {
+        tmpArr.push(angular.copy(array[indice-1]));//tmpArr = [{quantidadeMatriculados: 24, unidadeEnsino: 2, ano: 2014, periodo: 0, tipo: "SUP"}]
+        if(indice-1 === 0) { //me certifico que é o primeiro loop
+            todosOsNiveis.push(angular.copy(tmpArr));// todosOsNiveis = [{tmpArr : [{quantidadeMatriculados: 24, unidadeEnsino: 2, ano: 2014, periodo: 0, tipo: "SUP"}]}]
+        } else {
+            agrupaPorUnidade(todosOsNiveis,tmpArr);
+        }
+        tmpArr.splice(0);
+    });
+    console.log("Over");
+}
 function agrupaPorUnidade(todosOsNiveis,tmpArr) {
     let adicionaNoPai = false;
     let adicionaNoFilho = false;
     let arrAux = [];
     //findIndex
+    let teste = todosOsNiveis.findIndex( item => item.unidadeEnsino === tmpArr[0].unidadeEnsino);
+    console.log(teste);
     for (let indexPai = 0, lenPai = todosOsNiveis.length; indexPai < lenPai; indexPai++) {
         for (let indexFilho = 0, lenFilho = todosOsNiveis[indexPai].length; indexFilho < lenFilho; indexFilho++) {
+            teste = todosOsNiveis.findIndex( item => item.unidadeEnsino === tmpArr[0].unidadeEnsino);
+            console.log(teste);
             if(!adicionaNoFilho && todosOsNiveis[indexPai][indexFilho].unidadeEnsino === tmpArr[0].unidadeEnsino) {
                 todosOsNiveis[indexPai].push(angular.copy(tmpArr[0]));
                 adicionaNoFilho = true;
@@ -50,6 +58,8 @@ function agrupaPorUnidade(todosOsNiveis,tmpArr) {
             break;
         }
     }
+}
+callMe();
 /*
     angular.forEach(todosOsNiveis, function(pai) {// 1º nível: cada linha representa uma unidade
         angular.forEach(pai, function(filho) {// 2º nível: itens de cada unidades
@@ -64,7 +74,7 @@ function agrupaPorUnidade(todosOsNiveis,tmpArr) {
             adicionaNoPai = false;
         }
     });*/
-}
+
 /*
 function mesmaUnidadeEnsino(arrayOfArray, arrayResponse) {
     for(let index = 0, len = arrayOfArray.length; index < len; index++) {
