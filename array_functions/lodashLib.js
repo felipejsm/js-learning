@@ -12,7 +12,9 @@ let data = [
     {quantidadeMatriculados: 1, unidadeEnsino: 4, ano: 2017, periodo: 1, tipo: "SUP"},
     {quantidadeMatriculados: 10, unidadeEnsino: 5, ano: 2016, periodo: 1, tipo: "SUP"},
     {quantidadeMatriculados: 3, unidadeEnsino: 20, ano: 2017, periodo: 0, tipo: "TEC"}
-]; // -> exemplo de como os dados virão
+];
+let unidadeEnsinoIds = [1,2,3,4,5,20];
+let nivel2 = [];
 function callMe() {
     console.log("Start you're engines, gentleman: ");
     var result = _(data)
@@ -20,4 +22,28 @@ function callMe() {
     .value();
     console.log("Over");
 }
-callMe();
+const groupByTipo = (data, unidadeEnsinoIds) => {
+    for(let index = 0, len = unidadeEnsinoIds.length; index < len; index++) {
+        let pos = unidadeEnsinoIds[index];
+        nivel2.push({'unidadeEnsino': pos, 'nivel2': _.chain(data)
+        .filter(filter_by => filter_by.unidadeEnsino == pos)
+        .groupBy(x => x.tipo)
+        .map((objs, key) => ({
+          'tipo': key,
+          'quantidadeMatriculados': _.sumBy(objs, 'quantidadeMatriculados') }))
+        .value()});
+    }
+    console.log(nivel2);
+  };
+function callMe2() {
+    var result = _(data)
+    .groupBy(x => x.tipo)
+    .map((objs, key) => ({
+        'tipo': key,
+        'quantidadeMatriculados': _.sumBy(objs, 'quantidadeMatriculados') }))
+    .value();
+   
+    console.log(result);
+}
+callMe2();
+groupByTipo(data,unidadeEnsinoIds);
